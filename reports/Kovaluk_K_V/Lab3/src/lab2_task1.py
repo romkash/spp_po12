@@ -24,7 +24,9 @@ class CharSet:
             print(f"Элемент '{char}' уже существует в множестве.")
             return False
         if len(self._items) >= self._max_size:
-            print(f"Ошибка: Достигнута максимальная мощность множества ({self._max_size}). Элемент '{char}' не добавлен.")
+            print(
+                f"Ошибка: Достигнута максимальная мощность множества ({self._max_size}). Элемент '{char}' не добавлен."
+            )
             return False
         self._items.append(char)
         print(f"Элемент '{char}' успешно добавлен.")
@@ -58,7 +60,9 @@ class CharSet:
         return new_set
 
     def display(self):
-        print(f"Множество (мощность {len(self._items)}/{self._max_size}): {self._items}")
+        print(
+            f"Множество (мощность {len(self._items)}/{self._max_size}): {self._items}"
+        )
 
     def __str__(self):
         return f"CharSet(capacity={self._max_size}, items={self._items})"
@@ -66,8 +70,9 @@ class CharSet:
     def __eq__(self, other):
         if not isinstance(other, CharSet):
             return False
-        return (self._max_size == other._max_size and
-                set(self._items) == set(other._items))
+        return self._max_size == other._max_size and set(self._items) == set(
+            other._items
+        )
 
 
 if __name__ == "__main__":
@@ -82,15 +87,15 @@ if __name__ == "__main__":
     set2.display()
 
     print("\n--- Операции добавления/удаления ---")
-    set1.add('c')
-    set1.add('d')
-    set1.add('e')
-    set1.add('f')
+    set1.add("c")
+    set1.add("d")
+    set1.add("e")
+    set1.add("f")
     set1.display()
 
-    set1.remove('a')
+    set1.remove("a")
     set1.display()
-    set1.remove('z')
+    set1.remove("z")
 
     print("\n--- Проверка принадлежности ---")
     print(f"Содержит ли set1 символ 'b'? {set1.contains('b')}")
