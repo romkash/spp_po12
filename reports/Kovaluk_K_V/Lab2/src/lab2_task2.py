@@ -218,4 +218,3 @@ if __name__ == "__main__":
     d2.complete_trip(t2)
 
     disp.show_system_state()
-    
