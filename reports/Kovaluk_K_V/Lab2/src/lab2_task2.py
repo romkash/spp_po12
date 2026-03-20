@@ -83,7 +83,7 @@ class Trip:
         self.assigned_car = None
 
     def __str__(self):
-        driver_name = (self.assigned_driver.name if self.assigned_driver else "не назначен")
+        driver_name = self.assigned_driver.name if self.assigned_driver else "не назначен"
         return f"Рейс {self.trip_id} до {self.destination}, статус: {self.status.value}, водитель: {driver_name}"
 
 
