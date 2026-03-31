@@ -16,19 +16,19 @@ class Student:
         self.name = name
 
     def __str__(self):
-        return f"Студент: {self.name}"
+        return "Студент: {self.name}"
 
 class Teacher:
     def __init__(self, name):
         self.name = name
 
     def announce_course(self, title):
-        print(f"[Преподаватель {self.name}]: Открыта запись на курс '{title}'")
+        print("[Преподаватель {self.name}]: Открыта запись на курс '{title}'")
         return Course(title)
 
-    def set_grade(self, student, course, value, archive):
-        print(f"[Преподаватель {self.name}]: Выставлена оценка {value} студенту {student.name}")
-        archive.save_record(student.name, course.title, value)
+def set_grade(self, student, course, value, archive_obj):
+    print(f"[Преподаватель {self.name}]: Выставлена оценка {value} студенту {student.name}")
+    archive_obj.save_record(student.name, course.title, value)
 
 class Archive:
     def __init__(self):
@@ -46,7 +46,7 @@ class Archive:
         if not self.records:
             print("Записей нет.")
         for r in self.records:
-            print(f"Студент: {r['student']} | Курс: {r['course']} | Оценка: {r['grade']}")
+            print("Студент: {r['student']} | Курс: {r['course']} | Оценка: {r['grade']}")
 
 # Демонстрация
 print("--- Система Факультатив ---")
@@ -71,10 +71,10 @@ while True:
 
     if choice == "1":
         course_python.students.append(student1)
-        print(f"{student1.name} записан.")
+        print("{student1.name} записан.")
     elif choice == "2":
         course_python.students.append(student2)
-        print(f"{student2.name} записан.")
+        print("{student2.name} записан.")
     elif choice == "3":
         val = input("Введите оценку для Алексея: ")
         teacher.set_grade(student1, course_python, val, archive)

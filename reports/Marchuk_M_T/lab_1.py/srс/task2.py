@@ -33,7 +33,7 @@ def main() -> None:
         target = int(input("Введите целевое число target: "))
 
         result = find_two_sum(nums, target)
-        print(f"Output: {result}")
+        print("Output: {result}")
     except ValueError:
         print("Ошибка: вводите только целые числа.")
 

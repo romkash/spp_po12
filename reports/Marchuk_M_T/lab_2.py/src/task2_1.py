@@ -32,21 +32,23 @@ class IsoscelesTriangle:
     def is_exists(self):
         """Проверка существования: сумма двух сторон больше третьей"""
         a, b = self._base, self._side
-        return (2 * b > a) and (a > 0) and (b > 0)
+        return 2 * self._side > self._base > 0 and self._side > 0
 
     def get_perimeter(self):
-        if not self.is_exists(): return 0
+        if not self.is_exists():
+            return 0
         return self._base + 2 * self._side
 
     def get_area(self):
-        if not self.is_exists(): return 0
+        if not self.is_exists():
+            return 0
         # Высота по теореме Пифагора: h = sqrt(side^2 - (base/2)^2)
         h = math.sqrt(self._side**2 - (self._base / 2)**2)
         return 0.5 * self._base * h
 
     def __str__(self):
         if self.is_exists():
-            return f"Равнобедренный треугольник (основание={self._base}, бедра={self._side})"
+            return "Равнобедренный треугольник (основание={self._base}, бедра={self._side})"
         return "Треугольник с такими сторонами не существует"
 
     def __eq__(self, other):
@@ -66,24 +68,24 @@ tri2 = IsoscelesTriangle(b2, s2)
 
 while True:
     print("\nМЕНЮ:")
-    print(f"1. Показать данные (T1: {tri1})")
-    print(f"2. Расчитать периметр и площадь T1")
-    print(f"3. Проверить существование T1")
-    print(f"4. Сравнить T1 и T2")
-    print(f"0. Выход")
+    print("1. Показать данные (T1: {tri1})")
+    print("2. Расчитать периметр и площадь T1")
+    print("3. Проверить существование T1")
+    print("4. Сравнить T1 и T2")
+    print("0. Выход")
 
     choice = input("\nВыберите действие: ")
 
     if choice == "1":
-        print(f"T1: {tri1}")
-        print(f"T2: {tri2}")
+        print("T1: {tri1}")
+        print("T2: {tri2}")
     elif choice == "2":
-        print(f"Периметр T1: {tri1.get_perimeter()}")
-        print(f"Площадь T1: {tri1.get_area():.2f}")
+        print("Периметр T1: {tri1.get_perimeter()}")
+        print("Площадь T1: {tri1.get_area():.2f}")
     elif choice == "3":
         msg = "Существует" if tri1.is_exists() else "Не существует"
-        print(f"Результат: {msg}")
+        print("Результат: {msg}")
     elif choice == "4":
-        print(f"Равны ли треугольники?: {tri1 == tri2}")
+        print("Равны ли треугольники?: {tri1 == tri2}")
     elif choice == "0":
         break
