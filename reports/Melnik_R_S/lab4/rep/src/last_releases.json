@@ -1,0 +1,7 @@
+{
+    "facebook/react": "v19.2.4",
+    "microsoft/vscode": "1.114.0",
+    "nodejs/node": "v25.9.0",
+    "twbs/bootstrap": "v5.3.8",
+    "tensorflow/tensorflow": "v2.21.0"
+}
