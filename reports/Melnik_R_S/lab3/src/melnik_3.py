@@ -17,13 +17,13 @@ class Employee:
         self.position: str = pos
         self.salary: float = sal
         self.level: int = level
-        self.subordinates: List['Employee'] = []
+        self.subordinates: List["Employee"] = []
 
-    def add_subordinate(self, emp: 'Employee') -> None:
+    def add_subordinate(self, emp: "Employee") -> None:
         """Добавляет сотрудника в список подчиненных."""
         self.subordinates.append(emp)
 
-    def accept(self, visitor: 'CompanyVisitor') -> None:
+    def accept(self, visitor: "CompanyVisitor") -> None:
         """Принимает посетителя и передает его подчиненным."""
         visitor.visit_employee(self)
         for sub in self.subordinates:
@@ -54,8 +54,10 @@ class SalaryReportVisitor(CompanyVisitor):
 
     def print_report(self) -> None:
         """Выводит отчет, отсортированный по отделам и старшинству."""
-        header = (f"{'ОТДЕЛ':<15} | {'СТАТУС':<5} | {'ДОЛЖНОСТЬ':<20} | "
-                  f"{'ФИО':<18} | {'ЗАРПЛАТА':<10}")
+        header = (
+            f"{'ОТДЕЛ':<15} | {'СТАТУС':<5} | {'ДОЛЖНОСТЬ':<20} | "
+            f"{'ФИО':<18} | {'ЗАРПЛАТА':<10}"
+        )
         print(header)
         print("-" * 80)
 
@@ -67,8 +69,10 @@ class SalaryReportVisitor(CompanyVisitor):
             dept_total = 0.0
 
             for emp in employees:
-                print(f"{emp.department:<15} | Lvl {emp.level} | "
-                      f"{emp.position:<20} | {emp.name:<18} | {emp.salary:<10.2f}")
+                print(
+                    f"{emp.department:<15} | Lvl {emp.level} | "
+                    f"{emp.position:<20} | {emp.name:<18} | {emp.salary:<10.2f}"
+                )
                 dept_total += emp.salary
 
             print(f"{' ' * 45} Итого по отделу {dept}: {dept_total:.2f} руб.")
