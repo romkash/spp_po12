@@ -24,7 +24,6 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import sessionmaker, relationship, Session, declarative_base
 
-
 SQLALCHEMY_DATABASE_URL = "sqlite:///./accounting.db"
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
@@ -33,11 +32,9 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 
-
-
-
 class Department(Base):
     """Модель таблицы отделов."""
+
     __tablename__ = "departments"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -47,6 +44,7 @@ class Department(Base):
 
 class Employee(Base):
     """Модель таблицы сотрудников."""
+
     __tablename__ = "employees"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -60,6 +58,7 @@ class Employee(Base):
 
 class Counterparty(Base):
     """Модель таблицы контрагентов."""
+
     __tablename__ = "counterparties"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -69,6 +68,7 @@ class Counterparty(Base):
 
 class Category(Base):
     """Модель таблицы категорий операций."""
+
     __tablename__ = "categories"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -77,6 +77,7 @@ class Category(Base):
 
 class Transaction(Base):
     """Модель таблицы финансовых транзакций."""
+
     __tablename__ = "transactions"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -89,15 +90,12 @@ class Transaction(Base):
     category_id = Column(Integer, ForeignKey("categories.id"))
 
 
-
 Base.metadata.create_all(bind=engine)
-
-
-
 
 
 class EmployeeCreate(BaseModel):
     """Схема для создания нового сотрудника."""
+
     full_name: str
     position: str
     salary: float
@@ -106,13 +104,13 @@ class EmployeeCreate(BaseModel):
 
 class EmployeeOut(EmployeeCreate):
     """Схема для вывода данных о сотруднике."""
+
     id: int
 
     class Config:
         """Настройки Pydantic для работы с SQLAlchemy."""
+
         orm_mode = True
-
-
 
 
 app = FastAPI(title="Система Бухгалтерии (Accounting API)")
@@ -130,7 +128,7 @@ def get_db():
 @app.get(
     "/employees/",
     response_model=List[EmployeeOut],
-    summary="Получить список всех сотрудников"
+    summary="Получить список всех сотрудников",
 )
 def read_employees(db: Session = Depends(get_db)):
     """Возвращает список всех сотрудников из базы данных."""
@@ -138,9 +136,7 @@ def read_employees(db: Session = Depends(get_db)):
 
 
 @app.post(
-    "/employees/",
-    response_model=EmployeeOut,
-    summary="Добавить нового сотрудника"
+    "/employees/", response_model=EmployeeOut, summary="Добавить нового сотрудника"
 )
 def create_employee(employee: EmployeeCreate, db: Session = Depends(get_db)):
     """Создает нового сотрудника и сохраняет его в базу."""
@@ -160,7 +156,9 @@ def update_employee(emp_id: int, new_salary: float, db: Session = Depends(get_db
 
     db_emp.salary = new_salary
     db.commit()
-    return {"message": f"Зарплата сотрудника ID={emp_id} успешно обновлена на {new_salary}"}
+    return {
+        "message": f"Зарплата сотрудника ID={emp_id} успешно обновлена на {new_salary}"
+    }
 
 
 @app.delete("/employees/{emp_id}", summary="Уволить (удалить) сотрудника")
